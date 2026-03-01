@@ -1,0 +1,51 @@
+
+Your task is to create a doubly-linked, self-sorting list that can be used in place of the ArrayList used in the Hurricane assignment.
+
+If implemented correctly, minimal changes to Main.java will be needed to your Hurricane assignment code. For my solution, in Main.java the only changes I made were:
+
+	ArrayList <HurricaneRowData> data = new ArrayList <HurricaneRowData>();
+to
+	DoublyLinkedSortedList data = new DoublyLinkedSortedList();
+
+and then I changed
+
+	int max_year = maxAceYear(data);
+	System.out.println(max_year);
+to
+	Node link = data.getFirst();
+	HurricaneRowData dat = link.getValue();
+	int max_year = dat.getYear();
+	System.out.println("Year of max ace: "+max_year);
+	System.out.println("All data in order of Ace:");
+	System.out.println(data);
+
+Nothing else was changed in Main.java.
+
+An interface is provided to guide you. Your DoublyLinkedSortedList.java class must implement the interface. You can add more methods if you wish.
+
+You should also use a Node (aka link) class with methods such as: getValue, hasNext, setNext, getNext, hasPrevious, setPrevious, getPrevious, and possibly toString.
+
+Lastly, you must write 2 test methods for your DoublyLinkedSortedList. These methods should each test a different aspect of the correctness of the doubly linked list implementation. For instance, you could insert 3 items and then have code check that the list length is 3. You could insert a value that should go last into the sorted list and then verify that it is last. Keep it simple.
+
+Choose 2 tests that make sense to you and implement them in two separate methods. Call these methods in main and display output indicating success or failure of the tests.
+
+IMPORTANT: The data in the linked list MUST remain sorted at all times. In other words, as the data is added to the list, it must be automatically inserted in sorted order. You will not get full credit for sorting after all the data has been inserted.
+
+IMPORTANT 2: Turn in all of your hurricane code including the adjusted Main.java along with the new code. You should turn in:
+	Main.java
+	HurricaneRowData.java
+	DoublyLinkedSortedList.java
+	Node.java
+
+The following are OPTIONAL for EXTRA CREDIT:
+
++2 Add the following method to DoublyLinkedSortedList.java:
+	/* Post: Returns true if this linked list
+	* contains the given value. */
+	public boolean contains(HurricaneRowData value);
+
++2 Add the following method to DoublyLinkedSortedList.java:
+	/* Pre: This linked list contains the given value.
+	 * Post: Returns the node whose value
+	 * matches the given value. */
+	public Node getByValue(HurricaneRowData value);
