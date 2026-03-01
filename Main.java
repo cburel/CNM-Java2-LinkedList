@@ -1,11 +1,8 @@
 
 /**
  * @author Celeste Burel
- * Date: 2/1/2026
- * Purpose: to use collected hurricane data and calculate the maximum accumulated cyclone energy (ACE) value and year it occurred
- * Sources:
- *      Using writeString() method - https://www.geeksforgeeks.org/java/java-program-to-save-a-string-to-a-file/
- *      Using String split() method - https://www.w3schools.com/java/ref_string_split.asp
+ * Date: 3/8/2026
+ * Purpose: Refactor the Hurricane assignment to use a doubly linked list instead of an array list
 */
 
 import java.io.File;
@@ -24,7 +21,7 @@ public class Main {
 
         // setup
         File file = new File("ace.csv");
-        ArrayList<HurricaneRowData> rowData = new ArrayList<HurricaneRowData>();
+        DoublyLinkedSortedList rowData = new DoublyLinkedSortedList();
 
         // try to open the file and read it into rowData arraylist if it exists
         try (Scanner scanner = new Scanner(file)) {
