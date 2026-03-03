@@ -3,6 +3,7 @@
  * @author Celeste Burel
  * Date: 3/8/2026
  * Purpose: Refactor the Hurricane assignment to use a doubly linked list instead of an array list
+ * Sources: https://www.w3schools.com/java/java_generics.asp
 */
 
 import java.io.File;
@@ -44,7 +45,7 @@ public class Main {
 
                     // create a new row of data
                     HurricaneRowData newData = new HurricaneRowData(year, ace, numStorms, cat1To5, cat3To5);
-                    rowData.add(newData);
+                    rowData.insert(newData);
                 } catch (NumberFormatException e) {
 
                     // if the read value is not an integer, it should not be placed in the row. skip
@@ -71,24 +72,31 @@ public class Main {
      * @param rowData The array list of data to use. Called in getMaxAceYear and
      *                used to print.
      */
-    private static void writeOutput(ArrayList<HurricaneRowData> rowData) {
+    private static void writeOutput(DoublyLinkedSortedList rowData) {
 
         // for printing to console and txt file
-        String output = "";
+        String output = "Year of max ace: ";
 
         // search for the year with the maximum ACE in the array
-        for (HurricaneRowData data : rowData) {
+        /*
+         * for (HurricaneRowData data : rowData) {
+         * 
+         * // if the current row has the same year as the year found in getMaxAceYear,
+         * // update the output to that year and exit the loop
+         * if (data.getYear() == getMaxAceYear(rowData)) {
+         * output = data.toString();
+         * break;
+         * }
+         * }
+         */
 
-            // if the current row has the same year as the year found in getMaxAceYear,
-            // update the output to that year and exit the loop
-            if (data.getYear() == getMaxAceYear(rowData)) {
-                output = data.toString();
-                break;
-            }
-        }
+        Node link = rowData.getFirst();
+        HurricaneRowData data = link.getValue();
+        int maxYear = data.getYear();
+        output += maxYear;
 
         // display the year where the max ACE occurred in the console
-        System.out.println(output);
+        // System.out.println(output);
 
         // output the year where the max ACE occurred into a txt file
         Path path = Path.of("output.txt");
