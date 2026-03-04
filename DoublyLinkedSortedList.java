@@ -31,13 +31,15 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface {
         }
 
         // if node is between head and tail
-        // TODO: finish this
         Node temp = new Node(toRemove);
+        temp.getPrevious().setNext(temp.getNext());
+        temp.getNext().getPrevious().setPrevious(temp);
 
         return temp;
     }
 
     public void insert(HurricaneRowData newValue) {
+
         Node newNode = new Node(newValue);
 
         // case if list is empty

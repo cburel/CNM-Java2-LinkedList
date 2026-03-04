@@ -74,14 +74,17 @@ public class Main {
 
         // for printing to console and txt file
         String output = "Year of max ace: ";
+        String header = "All data in order of Ace: ";
 
         Node link = rowData.getLast();
         HurricaneRowData data = link.getValue();
         int maxYear = data.getYear();
         output += maxYear + "\n";
 
+        output += header + "\n";
+
         while (link != null) {
-            output += link.getValue().toString() + "\n";
+            output += link.toString() + "\n";
             link = link.getPrevious();
         }
 

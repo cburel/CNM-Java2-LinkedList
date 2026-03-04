@@ -71,6 +71,6 @@ public class HurricaneRowData {
      */
     @Override
     public String toString() {
-        return "Year of max ace: " + year;
+        return "Max ace year: " + year;
     }
 }
