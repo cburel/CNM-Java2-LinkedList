@@ -40,11 +40,37 @@ public class HurricaneRowData {
     }
 
     /**
+     * Gets the number of storms in a year
+     * 
+     * @return The number of storms
+     */
+    public int getNumStorms() {
+        return this.numStorms;
+    }
+
+    /**
+     * Gets the number of category 1 through 5 hurricanes in a year
+     * 
+     * @return The number of cat. 1-5 hurricanes
+     */
+    public int getCat1To5() {
+        return this.cat1To5;
+    }
+
+    /**
+     * Gets the number of category 3 through 5 hurricanes in a year
+     * 
+     * @return The number of cat. 3-5 hurricanes
+     */
+    public int getCat3To5() {
+        return this.cat3To5;
+    }
+
+    /**
      * Pretty-prints the information in a row of data
      */
     @Override
     public String toString() {
-        return "The maximum ACE value happened in the year " + year + " at a value of "
-                + ace;
+        return "Year of max ace: " + year;
     }
 }

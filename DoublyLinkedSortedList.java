@@ -13,8 +13,28 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface {
     }
 
     public Node remove(HurricaneRowData toRemove) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
+
+        // if list is empty
+        if (head == null) {
+            System.out.println("No node to remove!");
+            return null;
+        }
+
+        // if node is head
+        if (head.getValue() == toRemove) {
+            return head;
+        }
+
+        // if node is tail
+        if (tail.getValue() == toRemove) {
+            return tail;
+        }
+
+        // if node is between head and tail
+        // TODO: finish this
+        Node temp = new Node(toRemove);
+
+        return temp;
     }
 
     public void insert(HurricaneRowData newValue) {
@@ -37,7 +57,7 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface {
 
         // traverse list if new value should be inserted after head
         Node current = head;
-        while (current != null && current.getData().getAce() < newValue.getAce()) {
+        while (current != null && current.getValue().getAce() < newValue.getAce()) {
             current = current.getNext();
         }
 
@@ -59,17 +79,48 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface {
     }
 
     public boolean contains(HurricaneRowData data) {
+
+        if (head == null) {
+            return false;
+        }
+
+        Node current = head;
+        while (current.hasNext()) {
+            if (current.getValue().getAce() == data.getAce()
+                    && current.getValue().getCat1To5() == data.getCat1To5()
+                    && current.getValue().getCat3To5() == data.getCat3To5()
+                    && current.getValue().getNumStorms() == data.getNumStorms()
+                    && current.getValue().getYear() == data.getYear()) {
+                return true;
+            }
+            current = current.getNext();
+        }
         return false;
     }
 
     public Node getByValue(HurricaneRowData value) {
+        Node current = head;
+        while (current != null) {
+            if (current.getValue() == value) {
+                return current;
+            }
+        }
+
+        System.out.println("Value " + value + " was not found in the list.");
+
         return null;
     }
 
     @Override
     public String toString() {
 
+        Node current = head;
         String output = ""; // placeholder
+
+        while (current != null) {
+            output += current.toString() + "\n";
+        }
+
         return output;
     }
 

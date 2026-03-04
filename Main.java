@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -69,34 +68,25 @@ public class Main {
      * Handles writing the value of the max ACE and its year to the console and an
      * output.txt file
      * 
-     * @param rowData The array list of data to use. Called in getMaxAceYear and
-     *                used to print.
+     * @param rowData The array list of data to use.
      */
     private static void writeOutput(DoublyLinkedSortedList rowData) {
 
         // for printing to console and txt file
         String output = "Year of max ace: ";
 
-        // search for the year with the maximum ACE in the array
-        /*
-         * for (HurricaneRowData data : rowData) {
-         * 
-         * // if the current row has the same year as the year found in getMaxAceYear,
-         * // update the output to that year and exit the loop
-         * if (data.getYear() == getMaxAceYear(rowData)) {
-         * output = data.toString();
-         * break;
-         * }
-         * }
-         */
-
-        Node link = rowData.getFirst();
+        Node link = rowData.getLast();
         HurricaneRowData data = link.getValue();
         int maxYear = data.getYear();
-        output += maxYear;
+        output += maxYear + "\n";
+
+        while (link != null) {
+            output += link.getValue().toString() + "\n";
+            link = link.getPrevious();
+        }
 
         // display the year where the max ACE occurred in the console
-        // System.out.println(output);
+        System.out.println(output);
 
         // output the year where the max ACE occurred into a txt file
         Path path = Path.of("output.txt");
@@ -108,32 +98,5 @@ public class Main {
         } catch (Exception e) {
             System.err.println("Could not write to file " + path);
         }
-    }
-
-    /**
-     * Takes the hurricane row data and calculates the year that had the maximum ACE
-     * value
-     * 
-     * @param data The array list containing hurricane row data
-     * @return The year where the maximum ACE occurred
-     */
-    private static int getMaxAceYear(ArrayList<HurricaneRowData> data) {
-
-        int maxAce = 0; // tracks the maximum ACE value
-
-        int year = 0; // the year of the maximum ACE value
-
-        // iterate through the hurricane data
-        for (int i = 0; i < data.size(); i++) {
-
-            // if the ACE in the current year is larger than the current maximum ACE value,
-            // update the maximum value to the current value
-            if (data.get(i).getAce() > maxAce) {
-                maxAce = data.get(i).getAce();
-                year = data.get(i).getYear();
-            }
-        }
-
-        return year;
     }
 }
