@@ -78,19 +78,28 @@ public class Main {
         String output = "Year of max ace: ";
         String header = "All data in order of Ace: ";
 
+        // set up for list traversal. we're going in descending order of ACE, so start
+        // at the tail.
         Node link = rowData.getLast();
         HurricaneRowData data = link.getValue();
         int maxYear = data.getYear();
+
+        // for printing the "year of max ace" line
         output += maxYear + "\n";
 
+        // for printing the "all data in order of ace" header
         output += header + "\n";
 
+        // while there exists a node, add its data to the output as a string
         while (link != null) {
             output += link.toString() + "\n";
+
+            // go down the list by one node
             link = link.getPrevious();
         }
 
-        // display the year where the max ACE occurred in the console
+        // display the year where the max ACE occurred in the console. uncomment for
+        // debug
         // System.out.println(output);
 
         // output the year where the max ACE occurred into a txt file
@@ -105,23 +114,34 @@ public class Main {
         }
     }
 
+    /**
+     * Tests the contains method in DoublyLinkedSortedList.java
+     */
     public static void testContains() {
 
         DoublyLinkedSortedList newList = new DoublyLinkedSortedList();
-        HurricaneRowData contains = new HurricaneRowData(2023, 10, 3, 3, 2);
-        HurricaneRowData contains1 = new HurricaneRowData(2026, 15, 5, 2, 1);
+
+        // this could probably be done better but it's staying this way at least for now
+        HurricaneRowData contains = new HurricaneRowData(2023, 15, 3, 3, 2);
+        HurricaneRowData contains1 = new HurricaneRowData(2026, 10, 5, 2, 1);
         HurricaneRowData contains2 = new HurricaneRowData(1993, 5, 3, 1, 2);
 
+        // add the hurricane data rows to the list
         newList.insert(contains);
         newList.insert(contains1);
         newList.insert(contains2);
 
+        // grab the head
         Node link = newList.getFirst();
+
+        // while there exists a node, get the year and print it. will print in ascending
+        // order since we're using the head and following by next
         while (link != null) {
             System.out.println(link.getValue().getYear());
             link = link.getNext();
         }
 
+        // checks to see if the list contains a specific row and returns true or false
         System.out.println(newList.contains(contains1));
     }
 

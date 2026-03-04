@@ -59,8 +59,26 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface {
 
         // traverse list if new value should be inserted after head
         Node current = head;
-        while (current != null && current.getValue().getAce() < newValue.getAce()) {
-            current = current.getNext();
+        while (current != null) {
+
+            int currentAce = current.getValue().getAce();
+            int newAce = newValue.getAce();
+
+            // if the current ACE is smaller, keep going
+            if (currentAce <= newAce) {
+                current = current.getNext();
+            }
+
+            // the ACEs are the same, but the current year is smaller. put the newer year in
+            // front of the older one.
+            else if (currentAce == newAce && current.getValue().getYear() > newValue.getYear()) {
+                current = current.getPrevious();
+            }
+
+            // otherwise, exit the loop
+            else {
+                break;
+            }
         }
 
         // case if inserting after the tail
