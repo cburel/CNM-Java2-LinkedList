@@ -94,6 +94,11 @@ public class Node {
         return previous;
     }
 
+    /**
+     * Pretty-prints the data in a hurricane row
+     * 
+     * @return The formatted data string
+     */
     public String toString() {
         String output = String.format("%10d %10d %10d %10d %10d", value.getYear(), value.getAce(), value.getNumStorms(),
                 value.getCat1To5(), value.getCat3To5());

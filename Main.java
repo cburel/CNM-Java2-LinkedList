@@ -62,6 +62,8 @@ public class Main {
         // print the ultimate result to the console and to a txt file
         writeOutput(rowData);
 
+        testContains();
+
     }
 
     /**
@@ -89,7 +91,7 @@ public class Main {
         }
 
         // display the year where the max ACE occurred in the console
-        System.out.println(output);
+        // System.out.println(output);
 
         // output the year where the max ACE occurred into a txt file
         Path path = Path.of("output.txt");
@@ -101,5 +103,29 @@ public class Main {
         } catch (Exception e) {
             System.err.println("Could not write to file " + path);
         }
+    }
+
+    public static void testContains() {
+
+        DoublyLinkedSortedList newList = new DoublyLinkedSortedList();
+        HurricaneRowData contains = new HurricaneRowData(2023, 10, 3, 3, 2);
+        HurricaneRowData contains1 = new HurricaneRowData(2026, 15, 5, 2, 1);
+        HurricaneRowData contains2 = new HurricaneRowData(1993, 5, 3, 1, 2);
+
+        newList.insert(contains);
+        newList.insert(contains1);
+        newList.insert(contains2);
+
+        Node link = newList.getFirst();
+        while (link != null) {
+            System.out.println(link.getValue().getYear());
+            link = link.getNext();
+        }
+
+        System.out.println(newList.contains(contains1));
+    }
+
+    public static void testGetByValue() {
+
     }
 }

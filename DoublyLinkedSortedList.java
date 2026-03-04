@@ -73,10 +73,8 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface {
             Node before = current.getPrevious();
             newNode.setNext(current);
             newNode.setPrevious(before);
+            before.setNext(newNode);
             current.setPrevious(newNode);
-            if (before != null) {
-                before.setNext(newNode);
-            }
         }
     }
 
@@ -87,7 +85,7 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface {
         }
 
         Node current = head;
-        while (current.hasNext()) {
+        while (current != null) {
             if (current.getValue().getAce() == data.getAce()
                     && current.getValue().getCat1To5() == data.getCat1To5()
                     && current.getValue().getCat3To5() == data.getCat3To5()
