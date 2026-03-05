@@ -62,9 +62,10 @@ public class Main {
         // print the ultimate result to the console and to a txt file
         writeOutput(rowData);
 
-        testContains();
-        testGetByValue();
-        testRemove();
+        // testContains();
+        // testGetByValue();
+        // testRemove();
+        printReverse();
     }
 
     /**
@@ -81,8 +82,8 @@ public class Main {
 
         // set up for list traversal. we're going in descending order of ACE, so start
         // at the tail.
-        Node link = rowData.getLast();
-        HurricaneRowData data = link.getValue();
+        Node current = rowData.getLast();
+        HurricaneRowData data = current.getValue();
         int maxYear = data.getYear();
 
         // for printing the "year of max ace" line
@@ -92,11 +93,11 @@ public class Main {
         output += header + "\n";
 
         // while there exists a node, add its data to the output as a string
-        while (link != null) {
-            output += link.toString() + "\n";
+        while (current != null) {
+            output += current.toString() + "\n";
 
             // go down the list by one node
-            link = link.getPrevious();
+            current = current.getPrevious();
         }
 
         // display the year where the max ACE occurred in the console. uncomment for
@@ -133,13 +134,13 @@ public class Main {
         newList.insert(contains2);
 
         // grab the head
-        Node link = newList.getFirst();
+        Node current = newList.getFirst();
 
         // while there exists a node, get the year and print it. will print in ascending
         // order since we're using the head and following by next
-        while (link != null) {
-            System.out.println(link.getValue().getYear());
-            link = link.getNext();
+        while (current != null) {
+            System.out.println(current.getValue().getYear());
+            current = current.getNext();
         }
 
         // checks to see if the list contains a specific row and returns true or false
@@ -156,14 +157,14 @@ public class Main {
         newList.insert(value);
         newList.insert(value2);
 
-        Node link = newList.getFirst();
-        while (link != null) {
-            if (link.hasNext()) {
-                link = link.getNext();
+        Node current = newList.getFirst();
+        while (current != null) {
+            if (current.hasNext()) {
+                current = current.getNext();
             } else {
                 break;
             }
-            System.out.println(newList.getByValue(link.getValue()));
+            System.out.println(newList.getByValue(current.getValue()));
         }
     }
 
@@ -178,10 +179,34 @@ public class Main {
         newList.insert(value2);
         newList.insert(value3);
 
-        System.out.println(newList.remove(value));
+        Node current = newList.getFirst();
+        while (current != null) {
+            System.out.println(current.getValue().getYear());
+            current = current.getNext();
+        }
 
-        newList.remove(value3);
-
+        newList.remove(value);
         System.out.println(newList.toString());
+    }
+
+    public static void printReverse() {
+
+        DoublyLinkedSortedList newList = new DoublyLinkedSortedList();
+
+        HurricaneRowData value = new HurricaneRowData(2027, 11, 5, 2, 1);
+        HurricaneRowData value2 = new HurricaneRowData(2029, 12, 5, 2, 1);
+        HurricaneRowData value3 = new HurricaneRowData(2026, 13, 5, 2, 1);
+
+        newList.insert(value);
+        newList.insert(value2);
+        newList.insert(value3);
+
+        System.out.println("Printing list in reverse:");
+        Node current = newList.getLast();
+
+        while (current != null) {
+            System.out.println(current.toString());
+            current = current.getPrevious();
+        }
     }
 }

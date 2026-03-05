@@ -20,95 +20,43 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface {
             return null;
         }
 
-        // if node is null
-        if (toRemove == null) {
-            System.out.println("Node is null!");
-            return null;
-        }
-
-        // if node is head
-        if (head.getValue().getYear() == toRemove.getYear()) {
-
-            head = head.getNext();
-
-            if (head != null) {
-                head.setPrevious(null);
-            } else {
-
-                // list is empty
-                tail = null;
-            }
-
-            return head;
-        }
-
-        // if node is tail
-        if (tail.getValue().getYear() == toRemove.getYear()) {
-
-            tail = tail.getPrevious();
-
-            if (tail != null) {
-                tail.setNext(null);
-            } else {
-
-                // list is empty
-                head = null;
-            }
-
-            return tail;
-        }
-
-        // if node is between head and tail
         Node current = head;
 
         while (current != null) {
             if (current.getValue().getYear() == toRemove.getYear()) {
 
-                // the node was found
-                Node remove = current;
+                Node before = current.getPrevious();
+                Node after = current.getNext();
 
-                // if the node is the head
-                if (current == head) {
-                    head = current.getNext();
-                    if (head != null) {
-                        head.setPrevious(null);
-                    } else {
-
-                        // list is now empty
-                        tail = null;
-                    }
-                }
-
-                // if the node is the tail
-                else if (current == tail) {
-                    tail = current.getPrevious();
-                    if (tail != null) {
-                        tail.setNext(null);
-                    } else {
-
-                        // list is now empty
-                        head = null;
-                    }
-                }
-
-                // if the node is between head and tail
-                else {
-                    Node before = current.getPrevious();
-                    Node after = current.getNext();
+                // update the previous node
+                if (before != null) {
                     before.setNext(after);
-                    after.setPrevious(before);
+                } else {
+
+                    // there was no previous node
+                    head = after;
                 }
 
-                // remove the node from the list
-                remove.setNext(null);
-                return remove;
+                // update the next node
+                if (after != null) {
+                    after.setPrevious(before);
+                } else {
+
+                    // there was no next node
+                    tail = before;
+                }
+
+                // disconnect the node to remove
+                current.setNext(null);
+                current.setPrevious(null);
+                return current;
 
             }
 
             current = current.getNext();
         }
 
-        // node wasn't found
+        // node was not found in the list
         return null;
     }
 
@@ -142,36 +90,45 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface {
 
             int currentAce = current.getValue().getAce();
             int newAce = newValue.getAce();
+            int currentYear = current.getValue().getYear();
+            int newYear = newValue.getYear();
 
-            // if the current ACE is smaller, keep going
+            // keep going if the current ACE is smaller or ACE is equal and current year is
+            // greater than new year
             if (currentAce <= newAce) {
                 current = current.getNext();
-            }
+            } else if (currentAce == newAce && currentYear < newYear) {
 
-            // the ACEs are the same, but the current year is smaller. put the newer year in
-            // front of the older one.
-            else if (currentAce == newAce && current.getValue().getYear() > newValue.getYear()) {
-                current = current.getPrevious();
-            }
+                // ACE is equal, but current year is older, so keep going
+                current = current.getNext();
+            } else {
 
-            // otherwise, exit the loop
-            else {
+                // the new node either has a higher ACE or a newer year. exit the loop
                 break;
             }
         }
 
-        // case if inserting after the tail
+        // insert the node
         if (current == null) {
+
+            // insert at the tail
             newNode.setPrevious(tail);
             tail.setNext(newNode);
             tail = newNode;
         } else {
-            // case if inserting somewhere between head and tail
+
+            // insert before current
             Node before = current.getPrevious();
+
             newNode.setNext(current);
             newNode.setPrevious(before);
-            before.setNext(newNode);
             current.setPrevious(newNode);
+
+            if (before != null) {
+                before.setNext(newNode);
+            } else {
+                head = newNode;
+            }
         }
     }
 
@@ -218,6 +175,7 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface {
 
         while (current != null) {
             output += current.toString() + "\n";
+            current = current.getNext();
         }
 
         return output;
