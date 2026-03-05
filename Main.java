@@ -62,10 +62,22 @@ public class Main {
         // print the ultimate result to the console and to a txt file
         writeOutput(rowData);
 
-        // testContains();
-        // testGetByValue();
-        // testRemove();
+        System.out.println("====== TESTING METHODS ======");
+
+        System.out.println();
+        testContains();
+
+        System.out.println();
+        testGetByValue();
+
+        System.out.println();
+        testRemove();
+
+        System.out.println();
         printReverse();
+
+        System.out.println();
+        checkLength();
     }
 
     /**
@@ -137,13 +149,16 @@ public class Main {
         Node current = newList.getFirst();
 
         // while there exists a node, get the year and print it. will print in ascending
-        // order since we're using the head and following by next
+        // order by ACE since we're using the head and following by next
+        System.out.println("TESTING CONTAINS:");
+        System.out.println("Printing list:");
         while (current != null) {
-            System.out.println(current.getValue().getYear());
+            System.out.println(current.toString());
             current = current.getNext();
         }
 
         // checks to see if the list contains a specific row and returns true or false
+        System.out.println("List contains expected value:");
         System.out.println(newList.contains(contains1));
     }
 
@@ -164,6 +179,9 @@ public class Main {
             } else {
                 break;
             }
+
+            System.out.println("TESTING GET BY VALUE");
+            System.out.println("The value of the gotten row is:");
             System.out.println(newList.getByValue(current.getValue()));
         }
     }
@@ -180,11 +198,16 @@ public class Main {
         newList.insert(value3);
 
         Node current = newList.getFirst();
+
+        System.out.println("TESTING NODE REMOVAL");
+        System.out.println("Printing list:");
         while (current != null) {
-            System.out.println(current.getValue().getYear());
+            System.out.println(current.toString());
             current = current.getNext();
         }
 
+        System.out.println("REMOVING NODE");
+        System.out.println("List after removal: ");
         newList.remove(value);
         System.out.println(newList.toString());
     }
@@ -208,5 +231,30 @@ public class Main {
             System.out.println(current.toString());
             current = current.getPrevious();
         }
+    }
+
+    public static void checkLength() {
+        DoublyLinkedSortedList newList = new DoublyLinkedSortedList();
+
+        HurricaneRowData value = new HurricaneRowData(2027, 11, 5, 2, 1);
+        HurricaneRowData value2 = new HurricaneRowData(2029, 12, 5, 2, 1);
+        HurricaneRowData value3 = new HurricaneRowData(2026, 13, 5, 2, 1);
+
+        newList.insert(value);
+        newList.insert(value2);
+        newList.insert(value3);
+
+        System.out.println("TESTING LENGTH OF LIST");
+        System.out.println("Checking the length of a list. Expected: 3");
+
+        Node current = newList.getFirst();
+        int count = 0;
+        while (current != null) {
+            count++;
+            current = current.getNext();
+        }
+
+        System.out.print("The current length of the list is: ");
+        System.out.println(count);
     }
 }
