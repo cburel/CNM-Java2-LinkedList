@@ -20,22 +20,96 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface {
             return null;
         }
 
+        // if node is null
+        if (toRemove == null) {
+            System.out.println("Node is null!");
+            return null;
+        }
+
         // if node is head
-        if (head.getValue() == toRemove) {
+        if (head.getValue().getYear() == toRemove.getYear()) {
+
+            head = head.getNext();
+
+            if (head != null) {
+                head.setPrevious(null);
+            } else {
+
+                // list is empty
+                tail = null;
+            }
+
             return head;
         }
 
         // if node is tail
-        if (tail.getValue() == toRemove) {
+        if (tail.getValue().getYear() == toRemove.getYear()) {
+
+            tail = tail.getPrevious();
+
+            if (tail != null) {
+                tail.setNext(null);
+            } else {
+
+                // list is empty
+                head = null;
+            }
+
             return tail;
         }
 
         // if node is between head and tail
-        Node temp = new Node(toRemove);
-        temp.getPrevious().setNext(temp.getNext());
-        temp.getNext().getPrevious().setPrevious(temp);
+        Node current = head;
 
-        return temp;
+        while (current != null) {
+            if (current.getValue().getYear() == toRemove.getYear()) {
+
+                // the node was found
+                Node remove = current;
+
+                // if the node is the head
+                if (current == head) {
+                    head = current.getNext();
+                    if (head != null) {
+                        head.setPrevious(null);
+                    } else {
+
+                        // list is now empty
+                        tail = null;
+                    }
+                }
+
+                // if the node is the tail
+                else if (current == tail) {
+                    tail = current.getPrevious();
+                    if (tail != null) {
+                        tail.setNext(null);
+                    } else {
+
+                        // list is now empty
+                        head = null;
+                    }
+                }
+
+                // if the node is between head and tail
+                else {
+                    Node before = current.getPrevious();
+                    Node after = current.getNext();
+                    before.setNext(after);
+                    after.setPrevious(before);
+                }
+
+                // remove the node from the list
+                remove.setNext(null);
+                return remove;
+
+            }
+
+            current = current.getNext();
+        }
+
+        // node wasn't found
+        return null;
     }
 
     public void insert(HurricaneRowData newValue) {
@@ -43,11 +117,16 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface {
         Node newNode = new Node(newValue);
 
         // case if list is empty
-        if (head == null) {
+        if (head == null && tail == null) {
             head = tail = newNode;
             return;
         }
 
+        // case if node is null. disallow. this would break things.
+        if (newValue == null) {
+            System.out.println("Node cannot be null.");
+            return;
+        }
         // case if new value is smaller than head, insert before current head, then set
         // new references to new head and its tail
         if (newValue.getAce() <= head.getValue().getAce()) {
@@ -121,6 +200,8 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface {
         while (current != null) {
             if (current.getValue() == value) {
                 return current;
+            } else {
+                current = current.getNext();
             }
         }
 
@@ -133,7 +214,7 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface {
     public String toString() {
 
         Node current = head;
-        String output = ""; // placeholder
+        String output = "";
 
         while (current != null) {
             output += current.toString() + "\n";

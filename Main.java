@@ -63,7 +63,8 @@ public class Main {
         writeOutput(rowData);
 
         testContains();
-
+        testGetByValue();
+        testRemove();
     }
 
     /**
@@ -147,5 +148,40 @@ public class Main {
 
     public static void testGetByValue() {
 
+        DoublyLinkedSortedList newList = new DoublyLinkedSortedList();
+
+        HurricaneRowData value = new HurricaneRowData(2026, 10, 5, 2, 1);
+        HurricaneRowData value2 = new HurricaneRowData(2026, 10, 5, 2, 1);
+
+        newList.insert(value);
+        newList.insert(value2);
+
+        Node link = newList.getFirst();
+        while (link != null) {
+            if (link.hasNext()) {
+                link = link.getNext();
+            } else {
+                break;
+            }
+            System.out.println(newList.getByValue(link.getValue()));
+        }
+    }
+
+    public static void testRemove() {
+        DoublyLinkedSortedList newList = new DoublyLinkedSortedList();
+
+        HurricaneRowData value = new HurricaneRowData(2027, 10, 5, 2, 1);
+        HurricaneRowData value2 = new HurricaneRowData(2029, 10, 5, 2, 1);
+        HurricaneRowData value3 = new HurricaneRowData(2026, 10, 5, 2, 1);
+
+        newList.insert(value);
+        newList.insert(value2);
+        newList.insert(value3);
+
+        System.out.println(newList.remove(value));
+
+        newList.remove(value3);
+
+        System.out.println(newList.toString());
     }
 }
