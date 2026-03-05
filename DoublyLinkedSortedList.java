@@ -4,14 +4,29 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface {
     private Node head = null;
     private Node tail = null;
 
+    /**
+     * Gets the head of the list
+     * 
+     * @return The head of the list
+     */
     public Node getFirst() {
         return head;
     }
 
+    /**
+     * Gets the tail of the list
+     * 
+     * @return The tail of the list
+     */
     public Node getLast() {
         return tail;
     }
 
+    /**
+     * Removes a given node from a list
+     * 
+     * @return The removed node
+     */
     public Node remove(HurricaneRowData toRemove) {
 
         // if list is empty
@@ -60,6 +75,9 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface {
         return null;
     }
 
+    /**
+     * Inserts a given node into a list
+     */
     public void insert(HurricaneRowData newValue) {
 
         Node newNode = new Node(newValue);
@@ -132,6 +150,12 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface {
         }
     }
 
+    /**
+     * Checks if a list contains a specific value
+     * 
+     * @param data
+     * @return True if the list contains the value, false otherwise
+     */
     public boolean contains(HurricaneRowData data) {
 
         if (head == null) {
@@ -152,6 +176,12 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface {
         return false;
     }
 
+    /**
+     * Fetches a hurricane row data object by its value
+     * 
+     * @param value The row of data to find
+     * @return The row of data with the given value
+     */
     public Node getByValue(HurricaneRowData value) {
         Node current = head;
         while (current != null) {
@@ -167,6 +197,11 @@ public class DoublyLinkedSortedList implements DoublyLinkedSortedListInterface {
         return null;
     }
 
+    /**
+     * Concatenates all rows of data for printing
+     * 
+     * @return The concatenated string
+     */
     @Override
     public String toString() {
 

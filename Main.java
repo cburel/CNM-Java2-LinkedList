@@ -62,20 +62,29 @@ public class Main {
         // print the ultimate result to the console and to a txt file
         writeOutput(rowData);
 
+        // section to test various methods. comment/uncomment as desired. all results
+        // print to the console.
         System.out.println("====== TESTING METHODS ======");
 
+        // tests the method that checks if a list contains a specific hurricane row data
+        // object
         System.out.println();
         testContains();
 
+        // tests the method that gets a specific hurricane row data object from a list
         System.out.println();
         testGetByValue();
 
+        // tests removing a node from a list
         System.out.println();
         testRemove();
 
+        // tests to ensure correct backwards node linkage by printing a list in reverse
+        // order
         System.out.println();
         printReverse();
 
+        // tests to ensure a list's length is as expected
         System.out.println();
         checkLength();
     }
@@ -157,22 +166,31 @@ public class Main {
             current = current.getNext();
         }
 
-        // checks to see if the list contains a specific row and returns true or false
+        // checks to see if the list contains a specific row and returns true or false.
+        // prints result to the console
         System.out.println("List contains expected value:");
         System.out.println(newList.contains(contains1));
     }
 
+    /**
+     * Tests the getByValue method in DoublyLinkedSortedList.java
+     */
     public static void testGetByValue() {
 
         DoublyLinkedSortedList newList = new DoublyLinkedSortedList();
 
+        // this could be done better too
         HurricaneRowData value = new HurricaneRowData(2026, 10, 5, 2, 1);
-        HurricaneRowData value2 = new HurricaneRowData(2026, 10, 5, 2, 1);
+        HurricaneRowData value2 = new HurricaneRowData(2029, 11, 5, 2, 1);
 
+        // insert the values into the list
         newList.insert(value);
         newList.insert(value2);
 
+        // grab the head of the list
         Node current = newList.getFirst();
+
+        // traverse the list
         while (current != null) {
             if (current.hasNext()) {
                 current = current.getNext();
@@ -180,27 +198,36 @@ public class Main {
                 break;
             }
 
+            // print results to the console
             System.out.println("TESTING GET BY VALUE");
             System.out.println("The value of the gotten row is:");
             System.out.println(newList.getByValue(current.getValue()));
         }
     }
 
+    /**
+     * Tests the remove method in DoublyLinkedSortedList.java
+     */
     public static void testRemove() {
         DoublyLinkedSortedList newList = new DoublyLinkedSortedList();
 
+        // TODO: change this later?
         HurricaneRowData value = new HurricaneRowData(2027, 10, 5, 2, 1);
         HurricaneRowData value2 = new HurricaneRowData(2029, 10, 5, 2, 1);
         HurricaneRowData value3 = new HurricaneRowData(2026, 10, 5, 2, 1);
 
+        // insert the values into the list
         newList.insert(value);
         newList.insert(value2);
         newList.insert(value3);
 
+        // grab the head of the list
         Node current = newList.getFirst();
 
         System.out.println("TESTING NODE REMOVAL");
         System.out.println("Printing list:");
+
+        // traverses the list and prints each node to the console
         while (current != null) {
             System.out.println(current.toString());
             current = current.getNext();
@@ -208,25 +235,37 @@ public class Main {
 
         System.out.println("REMOVING NODE");
         System.out.println("List after removal: ");
+
+        // remove a given node
         newList.remove(value);
+
+        // print the list without the removed node to the console
         System.out.println(newList.toString());
     }
 
+    /**
+     * Tests printing the list in reverse order to ensure correct back-pointer links
+     */
     public static void printReverse() {
 
         DoublyLinkedSortedList newList = new DoublyLinkedSortedList();
 
+        // TODO: change this later?
         HurricaneRowData value = new HurricaneRowData(2027, 11, 5, 2, 1);
         HurricaneRowData value2 = new HurricaneRowData(2029, 12, 5, 2, 1);
         HurricaneRowData value3 = new HurricaneRowData(2026, 13, 5, 2, 1);
 
+        // insert the values into the list
         newList.insert(value);
         newList.insert(value2);
         newList.insert(value3);
 
         System.out.println("Printing list in reverse:");
+
+        // grab the tail of the list
         Node current = newList.getLast();
 
+        // traverse the list backwards and print each node to the console
         while (current != null) {
             System.out.println(current.toString());
             current = current.getPrevious();
@@ -236,10 +275,12 @@ public class Main {
     public static void checkLength() {
         DoublyLinkedSortedList newList = new DoublyLinkedSortedList();
 
+        // TODO: change this later?
         HurricaneRowData value = new HurricaneRowData(2027, 11, 5, 2, 1);
         HurricaneRowData value2 = new HurricaneRowData(2029, 12, 5, 2, 1);
         HurricaneRowData value3 = new HurricaneRowData(2026, 13, 5, 2, 1);
 
+        // insert the values into the list
         newList.insert(value);
         newList.insert(value2);
         newList.insert(value3);
@@ -247,13 +288,21 @@ public class Main {
         System.out.println("TESTING LENGTH OF LIST");
         System.out.println("Checking the length of a list. Expected: 3");
 
+        // grab the head of the list
         Node current = newList.getFirst();
+
+        // track how many times we've gone to a new node
         int count = 0;
         while (current != null) {
+
+            // we're on a new node. increment the counter
             count++;
+
+            // go to the next node
             current = current.getNext();
         }
 
+        // print the results to the console
         System.out.print("The current length of the list is: ");
         System.out.println(count);
     }
