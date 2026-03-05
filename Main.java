@@ -3,7 +3,11 @@
  * @author Celeste Burel
  * Date: 3/8/2026
  * Purpose: Refactor the Hurricane assignment to use a doubly linked list instead of an array list
- * Sources: https://www.w3schools.com/java/java_generics.asp
+ * Sources:
+ *      https://www.w3schools.com/java/java_generics.asp (I didn't end up using this but I
+ *      did try implementing it for a bit. Ultimately, using a generic here would require telling
+ *      the program to always expect HurricaneRowData objects in each Node, so there was little
+ *      point to changing the program to use generics.)
 */
 
 import java.io.File;
