@@ -150,13 +150,13 @@ public class Main {
 
         // this could probably be done better but it's staying this way at least for now
         HurricaneRowData contains = new HurricaneRowData(2023, 15, 3, 3, 2);
-        HurricaneRowData contains1 = new HurricaneRowData(2026, 10, 5, 2, 1);
-        HurricaneRowData contains2 = new HurricaneRowData(1993, 5, 3, 1, 2);
+        HurricaneRowData contains2 = new HurricaneRowData(2026, 10, 5, 2, 1);
+        HurricaneRowData contains3 = new HurricaneRowData(1993, 5, 3, 1, 2);
 
         // add the hurricane data rows to the list
         newList.insert(contains);
-        newList.insert(contains1);
         newList.insert(contains2);
+        newList.insert(contains3);
 
         // grab the head
         Node current = newList.getFirst();
@@ -173,7 +173,7 @@ public class Main {
         // checks to see if the list contains a specific row and returns true or false.
         // prints result to the console
         System.out.println("List contains expected value:");
-        System.out.println(newList.contains(contains1));
+        System.out.println(newList.contains(contains2));
     }
 
     /**
